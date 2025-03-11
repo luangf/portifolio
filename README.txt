@@ -1,6 +1,6 @@
 
 a portifolio that i'm working on.
-For now i know that the pages are made weird
+For now i know that the pages are made weird it has everything on the same '.html'
 i'm still improving it.
 
 The main one that im working on is called 'main.html'
