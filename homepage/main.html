@@ -9,6 +9,13 @@
             function open() {
                 document.getElementById('transition').classList.remove('closed');
             }
+
+            function addHovered(parent) {
+                parent.classList.add('hovered');
+            }
+            function remHovered(parent) {
+                parent.classList.remove('hovered');
+            }
             window.onload = function(){ setTimeout(function() {
                     open();
                     // I know that i should avoid using .style instead of the classlist
@@ -18,22 +25,25 @@
 
                 document.querySelectorAll('.project img').forEach(img => {
                     let timer;
-                    img.addEventListener('mouseenter', function() {
-                        let parent = img.closest('div[id]');
-                        if(!parent) return;
-
-                        timer = setTimeout(function() {
-                            parent.classList.add('hovered');
-                            console.log("parent found:", parent);
-                        }, 400);
-                    });
-
                     let parent = img.closest('div[id]');
                     if(!parent) return;
+
+                    img.addEventListener('click', function(){
+                        addHovered(parent);
+                    });
+
+                    img.addEventListener('mouseenter', function() {
+
+                        timer = setTimeout(function() {
+                            addHovered(parent);
+                        }, 800);
+                    });
+
+
                     parent.addEventListener('mouseleave', function() {
                         clearTimeout(timer);
                         setTimeout(function() {
-                            parent.classList.remove('hovered');
+                            remHovered(parent);
                         }, 150);
                     });
                 });
@@ -60,6 +70,20 @@
                     img.style.opacity = '1';
                 }
             });
+
+            function openMore(btn) {
+                let filter = document.createElement('div');
+                let newWindow = document.createElement('div');
+                let section = document.getElementById('projects');
+
+                section.insertAdjacentElement('afterbegin', newWindow);
+                newWindow.classList.add('more');
+                section.insertAdjacentElement('afterbegin', filter);
+                filter.classList.add('filter');
+
+
+            };
+
 
         </script>
         <title>main</title>
@@ -108,11 +132,12 @@
                     <div class="project">
                         <img class="image" src="https://media.istockphoto.com/id/1289411982/pt/foto/cyber-security-web-development-and-work-in-it-concept.jpg?s=2048x2048&w=is&k=20&c=3uzSkOhDiY2v7piHP4mSTiGPXg4D0U--Q-dzg_ORUxM=">
                         <div class="bar">
-                            <button class="bar-btn">o</button>
+                            <button class="bar-btn" onclick=openMore(this)>o</button>
                             <button class="bar-btn">o</button>
                         </div>
                         <div class="description">
                             <h3>Name</h3>
+                            <p>description</p>
                         </div>
                     </div>
                 </div>
