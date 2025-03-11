@@ -6,9 +6,42 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <link href="ori/style.css" rel="stylesheet">
         <script>
+            function open() {
+                document.getElementById('transition').classList.remove('closed');
+            }
+            window.onload = function(){ setTimeout(function() {
+                    open();
+                    // I know that i should avoid using .style instead of the classlist
+                    // i used a .style here becouse it will be done only once and it will stay like this after
+                    document.querySelector('.text-bar').style.color = 'var(--text-color)';
+                }, 300);
+
+                document.querySelectorAll('.project img').forEach(img => {
+                    let timer;
+                    img.addEventListener('mouseenter', function() {
+                        let parent = img.closest('div[id]');
+                        if(!parent) return;
+
+                        timer = setTimeout(function() {
+                            parent.classList.add('hovered');
+                            console.log("parent found:", parent);
+                        }, 400);
+                    });
+
+                    let parent = img.closest('div[id]');
+                    if(!parent) return;
+                    parent.addEventListener('mouseleave', function() {
+                        clearTimeout(timer);
+                        setTimeout(function() {
+                            parent.classList.remove('hovered');
+                        }, 150);
+                    });
+                });
+            };
+
             window.addEventListener('scroll', function() {
-                let textBar = document.getElementById('one');
-                let bar = document.getElementById('two');
+                let textBar = document.querySelector('.text-bar');
+                let bar = document.querySelector('.diagonal');
                 if (window.scrollY > 470) {
                     textBar.classList.add('scroll');
                     bar.classList.add('scroll');
@@ -18,73 +51,114 @@
                     bar.classList.remove('scroll');
                     bar.style.border = 'transparent';
                 }
+                if (window.scrollY > 350) {
+                    let img = document.querySelector('.intro-img');
+                    let intro = document.querySelector('.introduction');
+                    intro.style.color = 'var(--text-color)';
+                    intro.style.transform = 'translateY(0%)';
+                    img.style.transform = 'translateX(0%)';
+                    img.style.opacity = '1';
+                }
             });
 
-            window.onload = function(){
-                let div1 = document.getElementById('one');
-                let div2 = document.getElementById('two');
-                div1.classList.add('close');
-                div2.classList.add('close');
-                setTimeout(function() {
-                    div1.classList.remove('close');
-                    div2.classList.remove('close');
-                    div1.style.color = 'var(--text-color)';
-                }, 130)
-            };
         </script>
-        <title>origami</title>
+        <title>main</title>
     </head>
     <body>
         <header class="header">
             <ul>
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#introduction">Introduction</a></li>
                 <li><a href="#projects">Projects</a></li>
             </ul>
             <a href="">Other pages</a>
         </header>
         <section id="home">
-            <div id ="one" class="text-bar" class="text-bar-hover">
+            <div id="transition" class="closed">
+                <div  class="diagonal"></div>
+            </div>
+            <div class="text-bar">
                 <h2 class="text">My experience</h2>
                 <h1 class="text">with programing</h1>
             </div>
-            <div id="two" class="diagonal" class="diagonal-hover"></div>
+
         </section>
-        <section id="about">
-            <div class="about">
+        <section id="introduction">
+            <div class="introduction">
                 <h4>First real contact</h2>
                 <h5>I took one course in Java and worked on some personal projects using Python and JavaScript,
                     but my real journey into programming began when I enrolled in the CS50 course. Before that,
                     I had a solid understanding of programming languages, but when it came to creating programs
                     or websites, I often struggled with knowing where to start. Some problems felt overwhelming.
-                    At that time, I wasn't accustomed to using pseudocode to break down functions into smaller,
-                    manageable parts, which made tackling problems much easier. Although I’ve improved since then,
-                    I still occasionally find myself relying on a text file to organize my thoughts.</h3>
+                    At that time, I wasn't accustomed to using pseudocode to break down functions into smaller
+                    and more manageable parts, which made tackling problems much easier.
+                </h5>
+                <h5>Although I’ve improved since then,
+                    I still occasionally find myself relying on a text file to organize my thoughts.
+                </h5>
             </div>
-            <div class="intro-img">
-                <img>
+            <div>
+                <img class="intro-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAGdKjrh-Z8L8IgKSN_hbzL2-wd5pPwGq7cg&s" >
             </div>
         </section>
         <section id="projects">
             <h1>Projects</h1>
             <div class="projects-grid">
-                <a href=""><img src="https://media.istockphoto.com/id/1289411982/pt/foto/cyber-security-web-development-and-work-in-it-concept.jpg?s=2048x2048&w=is&k=20&c=3uzSkOhDiY2v7piHP4mSTiGPXg4D0U--Q-dzg_ORUxM="></a>
-                <a href=""><img src="https://media.istockphoto.com/id/1289411982/pt/foto/cyber-security-web-development-and-work-in-it-concept.jpg?s=2048x2048&w=is&k=20&c=3uzSkOhDiY2v7piHP4mSTiGPXg4D0U--Q-dzg_ORUxM="></a>
-                <a href=""><img src="https://media.istockphoto.com/id/1289411982/pt/foto/cyber-security-web-development-and-work-in-it-concept.jpg?s=2048x2048&w=is&k=20&c=3uzSkOhDiY2v7piHP4mSTiGPXg4D0U--Q-dzg_ORUxM="></a>
-                <a href=""><img src="https://media.istockphoto.com/id/1289411982/pt/foto/cyber-security-web-development-and-work-in-it-concept.jpg?s=2048x2048&w=is&k=20&c=3uzSkOhDiY2v7piHP4mSTiGPXg4D0U--Q-dzg_ORUxM="></a>
+                <div id="p1">
+                    <div class="project">
+                        <img class="image" src="https://media.istockphoto.com/id/1289411982/pt/foto/cyber-security-web-development-and-work-in-it-concept.jpg?s=2048x2048&w=is&k=20&c=3uzSkOhDiY2v7piHP4mSTiGPXg4D0U--Q-dzg_ORUxM=">
+                        <div class="bar">
+                            <button class="bar-btn">o</button>
+                            <button class="bar-btn">o</button>
+                        </div>
+                        <div class="description">
+                            <h3>Name</h3>
+                        </div>
+                    </div>
+                </div>
+                <div id="p2">
+                    <div class="project">
+                        <img class="image" src="https://media.istockphoto.com/id/1289411982/pt/foto/cyber-security-web-development-and-work-in-it-concept.jpg?s=2048x2048&w=is&k=20&c=3uzSkOhDiY2v7piHP4mSTiGPXg4D0U--Q-dzg_ORUxM=">
+                        <div class="bar">
+                            <button class="bar-btn">o</button>
+                            <button class="bar-btn">o</button>
+                        </div>
+                        <div class="description">
+                            <h3>Name</h3>
+                        </div>
+                    </div>
+                </div>
+                <div id="p3">
+                    <div class="project">
+                        <img class="image" src="https://media.istockphoto.com/id/1289411982/pt/foto/cyber-security-web-development-and-work-in-it-concept.jpg?s=2048x2048&w=is&k=20&c=3uzSkOhDiY2v7piHP4mSTiGPXg4D0U--Q-dzg_ORUxM=">
+                        <div class="bar">
+                            <button class="bar-btn">o</button>
+                            <button class="bar-btn">o</button>
+                        </div>
+                        <div class="description">
+                            <h3>Name</h3>
+                        </div>
+                    </div>
+                </div>
+                <div id="p4">
+                    <div class="project">
+                        <img class="image" src="https://media.istockphoto.com/id/1289411982/pt/foto/cyber-security-web-development-and-work-in-it-concept.jpg?s=2048x2048&w=is&k=20&c=3uzSkOhDiY2v7piHP4mSTiGPXg4D0U--Q-dzg_ORUxM=">
+                        <div class="bar">
+                            <button class="bar-btn">o</button>
+                            <button class="bar-btn">o</button>
+                        </div>
+                        <div class="description">
+                            <h3>Name</h3>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-                <!-- <p>I've been doing origami since I was a child, and I know how difficult it can be to understand how a
-                few folds in a sheet of paper can transform into an animal. But over time, I noticed something fascinating,
-                the way the brain adapts. In the beginning, trying to create an origami design felt impossible, but the more
-                I tried to understand it, the clearer it became. It didn’t become easy by any means, but it became easier.
-                With practice, I began to see how each fold influences the final model and how specific techniques can
-                shape the paper into intricate animals.</p> -->
         <footer>
-            <h6>Cellphone: <spam>55 51 994747444.</spam></h6>
-            <h6>Name: <spam>Guilherme Brum Pinto.</spam></h6>
-            <h6>Country: <spam>Brazil.</spam></h6>
-            <h6>State: <spam>Rio Grande do Sul (RS).</spam></h6>
+            <h6>Cellphone: <spam>55 51 994747444</spam></h6>
+            <h6>Name: <spam>Guilherme Brum Pinto</spam></h6>
+            <h6>Country: <spam>Brazil</spam></h6>
+            <h6>State: <spam>Rio Grande do Sul (RS)</spam></h6>
             <h6>Background image: <spam>https://images.unsplash.com/photo-1595623654300-b27329804025?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D</spam></h6>
         </footer>
     </body>
