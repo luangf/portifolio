@@ -24,14 +24,14 @@ h5{
     font-size: var(--font-size);
 }
 
-.header{
+.header {
     background-color: var(--background-color);
     position: fixed;
     width: 100%;
     display: flex;
     box-shadow: 0 4px 10px rgba(0, 0, 0, .8);
     padding: 18px;
-    z-index: 1000;
+    z-index: 990;
     transition: .2s ease;
 }
 
@@ -54,7 +54,7 @@ h5{
     color: var(--btn-color);
 }
 
-#home{
+#home {
     background: url(https://images.unsplash.com/photo-1595623654300-b27329804025?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
     background-size: cover;
     background-position: center;
@@ -62,7 +62,7 @@ h5{
     width: 100%;
 }
 
-.diagonal{
+.diagonal {
     display: flex;
     position: absolute;
     background-color: var(--background-color);
@@ -72,6 +72,12 @@ h5{
     right: 0;
     z-index: 950;
     transition: .4s ease;
+}
+
+.closed .diagonal {
+    width: 100%;
+    z-index: 1000;
+    pointer-events: none;
 }
 
 .diagonal::before{
@@ -84,10 +90,10 @@ h5{
 }
 
 .diagonal:hover{
-    width: 5%;
+    width: 4%;
 }
 
-.text-bar{
+.text-bar {
     position: relative;
     background-color: var(--background-color);
     left: 0;
@@ -101,12 +107,7 @@ h5{
     transition: .3s ease;
 }
 
-.close{
-    width: 100%;
-    transition: .0s;
-}
-
-.text-bar::after{
+.text-bar:after{
     content: '';
     position: absolute;
     height: 100%;
@@ -116,67 +117,143 @@ h5{
     background: linear-gradient(to top left, transparent 50%, #0D0D0D 50%);
 }
 
-.text{
+.text {
     position: relative;
     left: 10%;
-    transition: .5S ease;
+    transition: .5s ease;
 }
 
-.text-bar:hover .text{
+.text-bar:hover .text {
     transform: translateX(10%);
 }
 
-.text-bar:hover{
+.text-bar:hover {
     width: 62%;
 }
 
-.scroll{
+.scroll {
     width: 100%;
     box-shadow: 0 0 25px rgba(255, 255, 255, .8);
     pointer-events: none;
 }
 
-#about{
+#introduction {
     width: 90%;
     justify-content: center;
     margin:  100px auto;
     color: var(--text-color);
-
+    display: grid;
+    grid-template-columns: 60% 30%;
+    gap: 50px;
+    margin-bottom: 150px;
 }
 
-.about{
+.intro-img {
+    height: 100%;
+    transition: .5s ease;
+    transform: translateX(85%);
+    opacity: 0;
+}
+
+.introduction {
     width: 90%;
     margin: auto;
+    transform: translateY(85%);
+    color: var(--background-color);
+    transition: .6s ease;
 }
 
-.about h5{
+.introduction h5 {
     margin: 10px;
 }
 
-#projects h1{
+#projects h1 {
     display: flex;
     color: var(--text-color);
     justify-content: center;
 }
-.projects-grid{
+.projects-grid {
     width: 80%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 150px 0;
+    gap: 150px 20%;
     margin: 100px auto;
 }
 
-.projects-grid img{
+.projects-grid div{
+    margin: auto;
+}
+
+.project {
     position: relative;
-    display: flex;
     width: 40vh;
     justify-content: center;
     margin: auto;
     transition: .3s ease;
 }
 
-.projects-grid img:hover{
-    transform: scale(1.1);
+.bar {
+    position: absolute;
+    top: 0;
+    height: 0;
+    background-color: grey;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.bar-btn {
+    border-radius: 30%;
+    border-color: silver;
+    color: grey;
+    margin: 30px 10px;
+    top: 20;
+    display: relative;
+}
+
+.image{
+    width: 40vh;
+    transition: .3s ease;
+}
+
+.project .image:hover{
+    transform: translate(-5px);
+}
+
+.description{
+    position: absolute;
+    width: 40vh;
+    background-color: white;
+    top: 100%;
+    color: orange;
+    transition: .3s ease;
+    height: 0;
+    overflow: hidden;
+}
+
+.hovered{
+    width: 45vh;
+}
+
+.hovered .image{
+    transform: translateX(-5px);
+    z-index: 700;
+}
+
+.hovered .bar{
+    background-color: grey;
+    left: 98%;
+    display: flex;
+    height: 100%;
+    transition: .3s ease;
+    z-index: 650;
+
+}
+
+.hovered .description{
+    transform: translateX(-5px);
+    opacity: .6;
+    height: 40%;
+    top: 60%;
 }
 
 footer{
