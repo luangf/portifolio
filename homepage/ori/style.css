@@ -6,7 +6,7 @@
 :root{
     --background-color: #0D0D0D;
     --text-color: #EBEBEB;
-    --btn-color: #2A6600;
+    --btn-color: #3DB800;
     --font-size: 1.1rem;
     --title-size: 1.3rem;
 }
@@ -175,9 +175,16 @@ h5{
 .projects-grid {
     width: 80%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
     gap: 150px 20%;
     margin: 100px auto;
+}
+
+@media (max-width: 1000px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
 }
 
 .projects-grid div{
@@ -186,7 +193,7 @@ h5{
 
 .project {
     position: relative;
-    width: 40vh;
+    width: 50vh;
     justify-content: center;
     margin: auto;
     transition: .3s ease;
@@ -196,8 +203,10 @@ h5{
     position: absolute;
     top: 0;
     height: 0;
-    background-color: grey;
+    display: flex;
     flex-direction: column;
+    border-radius: 10px;
+    gap: 20%;
     overflow: hidden;
 }
 
@@ -211,7 +220,7 @@ h5{
 }
 
 .image{
-    width: 40vh;
+    width: 50vh;
     transition: .3s ease;
 }
 
@@ -221,31 +230,35 @@ h5{
 
 .description{
     position: absolute;
-    width: 40vh;
-    background-color: white;
+    width: 50vh;
+    background-color: var(--background-color);
     top: 100%;
-    color: orange;
+    color: var(--text-color);
     transition: .3s ease;
     height: 0;
     overflow: hidden;
 }
 
 .hovered{
-    width: 45vh;
+    background-color: #141414;
+    transition: .6s ease;
+    border-radius: 10px;
+    transform: translateX(1vh);
+    width: 55vh;
+}
+
+.hovered .project{
+    transform: translateX(-3vh);
 }
 
 .hovered .image{
     transform: translateX(-5px);
-    z-index: 700;
 }
 
 .hovered .bar{
-    background-color: grey;
-    left: 98%;
-    display: flex;
+    left: 99%;
     height: 100%;
     transition: .3s ease;
-    z-index: 650;
 
 }
 
@@ -255,6 +268,31 @@ h5{
     height: 40%;
     top: 60%;
 }
+
+.filter {
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+    opacity: .6;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    z-index: 970;
+}
+
+.more {
+    width: 70%;
+    height: 100vh;
+    top: 100px;
+    left: 15%;
+    background-color: #141414;
+    overflow-y: auto;
+    z-index: 980;
+    position: fixed;
+    border-radius: 20px;
+}
+
 
 footer{
     padding: 20px;
